@@ -26,6 +26,8 @@ import java.util.Map;
 @RestController
 public class WeChatController {
 
+    public static String token_now ;
+
     /*
      * 自定义token, 用作生成签名,从而验证安全性
      * */
@@ -79,7 +81,7 @@ public class WeChatController {
 //                Integer resultCode = jsonObject.getInteger("result");
                 String msg = null;
                 if ("123".equals(content)) {
-                    String resultContent = "锤子123";
+                    String resultContent = "123456";
                     msg = setText(resultContent, toUserName,fromUserName);
                 }else {
                     msg = setText("我现在有点忙.稍后回复您!", toUserName,fromUserName);
@@ -118,8 +120,21 @@ public class WeChatController {
                 "&secret=" +
                 "62f396c91d35abcb561e6ceee21acd03";
         JSONObject json = JSONObject.parseObject(HttpsGetUtil.doHttpsGetJson(url));
+
         System.out.println(json.getString("access_token"));
+        token_now = json.getString("access_token");
         System.out.println(json.getInteger("expires_in"));
+        return null;
+    }
+
+    @RequestMapping("addWxButton")
+    public String addWxButton(String paramter_now)
+    {
+        String url = " https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + token_now;
+        JSONObject json = JSONObject.parseObject(HttpsGetUtil.sendPost(url,paramter_now));
+        System.out.println(json.toJSONString());
+        System.out.println(json.getString("errcode"));
+        System.out.println(json.getInteger("errmsg"));
         return null;
     }
 
