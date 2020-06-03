@@ -81,7 +81,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.4</version>
+            <version>1.2.25.sec10</version>
         </dependency>
         <!--DOM4J-->
         <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
